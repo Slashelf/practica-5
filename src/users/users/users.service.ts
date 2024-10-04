@@ -48,15 +48,15 @@ export class UsersService {
 
   async update(id: number, updateUserDto: UpdateUserDto,createUserDto: CreateUserDto): Promise<UserResponseDto> {
     const existeGmail = await this.userRepository.findOneBy({ email: createUserDto.email });
-
-    if (existeGmail) {
-      throw new BadRequestException('Email already exists');
-    }
-    
+      
     const updateResult = await this.userRepository.update(id, updateUserDto);
 
     if (updateResult.affected === 0) {
       throw new NotFoundException(`User not found`);
+    }
+
+    if (existeGmail) {
+      throw new BadRequestException('Email already exists');
     }
    
     return this.findOne(id);
