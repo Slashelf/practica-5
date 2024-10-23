@@ -28,10 +28,9 @@ export class UsersService {
     }
 
     const newUser = this.userRepository.create(createUserDto);
-    await this.userRepository.save(newUser);
-    return new UserResponseDto(newUser);
+    return this.userRepository.save(newUser);
+    //return new UserResponseDto(newUser);
   }
-
   async findAll(): Promise<UserResponseDto[]> {
     const users = await this.userRepository.find();
     return users.map(user => new UserResponseDto(user));
@@ -46,19 +45,16 @@ export class UsersService {
     });
   }
 
-  async update(id: number, updateUserDto: UpdateUserDto,createUserDto: CreateUserDto): Promise<UserResponseDto> {
+  async update(id: number, updateUserDto: UpdateUserDto, createUserDto: CreateUserDto): Promise<UserResponseDto> {
     const existeGmail = await this.userRepository.findOneBy({ email: createUserDto.email });
-      
+  
+    if (existeGmail && existeGmail.id !== id) {
+      throw new BadRequestException('Email already exists');
+    }
     const updateResult = await this.userRepository.update(id, updateUserDto);
-
     if (updateResult.affected === 0) {
       throw new NotFoundException(`User not found`);
     }
-
-    if (existeGmail) {
-      throw new BadRequestException('Email already exists');
-    }
-   
     return this.findOne(id);
   }
   
