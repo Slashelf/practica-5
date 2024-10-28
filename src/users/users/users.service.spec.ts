@@ -16,7 +16,6 @@ const mockUserRepository = () => ({
 
 const mockUser = { id: 1, name: 'Test User', email: 'test@example.com', password: 'password123' };
 const viewmockUser = { id: 1, name: 'Test User', email: 'test@example.com'};
-const upwmockUser = { name: 'Test User', email: 'test@example.com'};
 type MockRepository<T = any> = Partial<Record<keyof Repository<T>, jest.Mock>>;
 
 describe('UsersService', () => {
@@ -93,7 +92,6 @@ describe('UsersService', () => {
   it('should throw a NotFoundException if the user does not exist', async () => {
     jest.spyOn(repository, 'findOneBy').mockResolvedValue(null);
 
-    // trabaja el metodo del servicio
     try {
       await service.findOne(1);
     } catch (error) {
@@ -106,7 +104,7 @@ describe('UsersService', () => {
   });
   
   it('should update a user', async () => {
-    const updatedUser = { ...mockUser, name: 'Updated User' };
+    const updatedUser = { ...viewmockUser, name: 'Updated User' };
 
     jest.spyOn(repository, 'update').mockResolvedValue({ affected: 1 } as any);
     jest.spyOn(repository, 'findOneBy').mockResolvedValue(updatedUser as User);
@@ -121,22 +119,22 @@ describe('UsersService', () => {
       name: 'Updated User',
       email: 'updated@example.com',
     });
-    expect(repository.findOne).toHaveBeenCalledWith({ id: 1 });
+    expect(repository.findOneBy).toHaveBeenCalledWith({ id: 1 });
   });
 
 
 
 
-  /*
+  
   it('should throw NotFoundException if the user to update does not exist', async () => {
     jest.spyOn(repository, 'update').mockResolvedValue({ affected: 0 } as any);
   
    
     try {
-      await expect(service.update(1, {
+      await service.update(1, {
         name: 'Non-existing User',
         email: 'nonexisting@example.com',
-      }, mockUser));
+      }, mockUser);
     } catch (error) {
       expect(error).toBeInstanceOf(NotFoundException);
       expect(error.message).toBe('User not found');
@@ -148,7 +146,7 @@ describe('UsersService', () => {
       email: 'nonexisting@example.com',
     });
 
-  });*/
+  });
 
 
 

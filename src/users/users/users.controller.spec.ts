@@ -7,7 +7,7 @@ import { UserResponseDto } from './dto/resp-user.dto';
 import { NotFoundException, BadRequestException } from '@nestjs/common';
 
 const mockUser = { id: 1,  name: 'Test User', email: 'test@example.com',  password: 'password123'};
-const wiewmockUser = { name: 'Test User', email: 'test@example.com',  password: 'password123'};
+const viewmockUser = { id: 1, name: 'Test User', email: 'test@example.com'};
 const upmockUser = {id: 1,   name: 'Updated User', email: 'updated@example.com', password: 'password123' };
 describe('UsersController', () => {
   let controller: UsersController;
@@ -42,7 +42,7 @@ describe('UsersController', () => {
     const createUserDto: CreateUserDto = {
       name: 'Test User',
       email: 'test@example.com',
-      password: 'password123', // Asegúrate de incluir la contraseña si es necesaria
+      password: 'password123', 
     };
 
     const result = await controller.create(createUserDto);
@@ -73,8 +73,8 @@ describe('UsersController', () => {
       email: 'updated@example.com',
     };
 
-    const result = await controller.update(1, updateUserDto, mockUser); // Asegúrate de pasar solo el ID y el DTO
-    expect(result).toEqual(updateUserDto);
+    const result = await controller.update(1, updateUserDto, upmockUser); 
+    expect(result).toEqual(upmockUser);
     expect(service.update).toHaveBeenCalledWith(1, updateUserDto);
   });
 
@@ -98,7 +98,7 @@ describe('UsersController', () => {
   });
 
   it('should delete a user', async () => {
-    const result = await controller.delete(1); // Cambiado a 'remove' en lugar de 'delete'
+    const result = await controller.delete(1);
     expect(result).toBeUndefined();
     expect(service.remove).toHaveBeenCalledWith(1);
   });
