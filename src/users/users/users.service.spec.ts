@@ -4,6 +4,7 @@ import { Repository } from 'typeorm';
 import { User } from './entities/user.entity';
 import { getRepositoryToken } from '@nestjs/typeorm';
 import { NotFoundException, BadRequestException, HttpException } from '@nestjs/common';
+import { UpdateUserDto } from './dto/update-user.dto';
 
 const mockUserRepository = () => ({
   create: jest.fn(),
@@ -60,6 +61,25 @@ describe('UsersService', () => {
     expect(repository.save).toHaveBeenCalled();
     expect(repository.create).toHaveBeenCalled();
   });
+
+  it('should throw a BadRequestException if the email already exists', async () => {
+    jest.spyOn(repository, 'findOneBy').mockResolvedValue(mockUser as User);
+  
+    try {
+      await service.create({
+        name: 'Test User',
+        email: 'test@example.com',
+        password: 'password123',
+      });
+    } catch (error) {
+      expect(error).toBeInstanceOf(BadRequestException);
+      expect(error.message).toBe('Email already exists');
+      expect(error.getStatus()).toBe(400);
+    }
+  
+    expect(repository.findOneBy).toHaveBeenCalledWith({ email: 'test@example.com' });
+  });
+  
 
 
   it('should retrieve all users', async () => {
@@ -123,7 +143,22 @@ describe('UsersService', () => {
   });
 
 
-
+  it('should throw a BadRequestException if the email already exists and belongs to another user', async () => {
+    // Simulamos que el correo ya pertenece a otro usuario
+    const existingUser = { ...mockUser, id: 2 }; // Simulamos que es otro usuario
+    jest.spyOn(repository, 'findOneBy').mockResolvedValue(existingUser);
+  
+    try {
+      await service.update(1,{ name: 'Updated User', email: 'test@example.com' }, mockUser);
+    } catch (error) {
+      expect(error).toBeInstanceOf(BadRequestException);
+      expect(error.message).toBe('Email already exists');
+      expect(error.getStatus()).toBe(400);
+    }
+  
+    expect(repository.findOneBy).toHaveBeenCalledWith({ email: 'test@example.com' });
+  });
+  
 
   
   it('should throw NotFoundException if the user to update does not exist', async () => {

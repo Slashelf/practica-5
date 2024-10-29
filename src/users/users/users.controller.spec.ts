@@ -74,8 +74,8 @@ describe('UsersController', () => {
     };
 
     const result = await controller.update(1, updateUserDto, upmockUser); 
-    expect(result).toEqual(upmockUser);
-    expect(service.update).toHaveBeenCalledWith(1, updateUserDto);
+    expect(result).toEqual(mockUser);
+    expect(service.update).toHaveBeenCalledWith(1, updateUserDto, upmockUser);
   });
 
   
