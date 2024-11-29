@@ -1,112 +1,10 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
-</p>
-
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
-
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
-
 # Documentación de API: CRUD de Usuarios
 
-## Tabla de contenido
-
-1. [Introducción](#introducción)
-2. [Instalación](#instalación)
-3. [Comandos](#comandos)
-4. [Base de datos](#base-de-datos)
-6. [URL Base Swagger](#url-base-swagger)
-5. [Test para el API con PostMan y resultado obtenidos](#test-para-el-api-con-postman-y-resultado-obtenidos)
-   - [Crear Usuario](#1-crear-usuario)
-   - [Crear Usuario con un email ya registrado en la base de datos](#2-crear-usuario-con-un-email-ya-registrado-en-la-base-de-datos)
-   - [Obtener Usuarios](#3-obtener-todos-los-usuarios)
-   - [Obtener Usuario por ID](#4-obtener-usuario-por-id)
-   - [Cuando un Usuario no es encontrado por ID](#5-cuando-un-usuario-no-es-encontrado-por-id)
-   - [Editar Usuario](#6-editar-usuario)
-   - [Editar Usuario con un email ya existente en la base de datos](#7-editar-usuario-con-un-email-ya-existente-en-la-base-de-datos)
-   - [Cuando un Usuario no es encontrado por ID al intentar editar sus datos](#8-cuando-un-usuario-no-es-encontrado-por-id-al-intentar-editar-sus-datos)
-   - [Eliminar un Usuario](#9-eliminar-un-usuario)
-   - [Cuando un Usuario no es encontrado por ID al intentar eliminarlo](#10-cuando-un-usuario-no-es-encontrado-por-id-al-intentar-eliminarlo)
+Esta documentación incluye el código Postman para probar la API, imágenes que demuestran el resultado obtenido al realizar el test, y un enlace para acceder a la documentación generada automáticamente.
 
 ---
 
-## Introducción
-
-Este proyecto implementa una API para la gestión de usuarios, con soporte para operaciones CRUD (crear, leer, actualizar y eliminar). También incluye tests automatizados y documentación generada con Swagger.
-
----
-
-## Instalación
-
-Utilice el siguiente comando para instalar las dependencias necesarias para que el proyecto funcione adecuadamente:
-
-```bash
-$ npm install
-```
----
-
-## Comandos
-
-### Compile el proyecto con acualquiera de los siguiente comandos
-
-```bash
-# development
-$ npm run start
-
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
-```
-
-### Comandos Para probar los test
-
-```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
-```
----
-
-## Base de datos
-
-```bash
-# base de datos general
-$ users
-
-# para las pruebas de aceptacion
-$ users_db_test
-
-# para las pruebas de integracion
-$ usuarios_test_db
-```
-
-
-
----
-
-## URL Base Swagger
+## URL Base
 
 
 ### Documentación Swagger
@@ -115,7 +13,6 @@ Accede a la documentación en Swagger en el siguiente enlace:
 [http://localhost:3000/api-docs](http://localhost:3000/api-docs)
 
 ---
-## Test para el API con PostMan y resultado obtenidos
 
 ## 1. Crear Usuario
 
